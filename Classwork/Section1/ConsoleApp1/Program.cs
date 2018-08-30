@@ -68,6 +68,7 @@ namespace ConsoleApp1
 
         //Other stuff
         string upperName = firstName.ToUpper();
+
         string lowerName = firstName.ToLower();
 
         // Comparison
