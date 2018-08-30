@@ -10,9 +10,13 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
        {
-            
-    //DisplayMenu();
-        PlayWithStrings();
+            bool notQuit;
+            do
+            {
+                 notQuit = DisplayMenu();
+            } while (notQuit);
+
+       // PlayWithStrings();
     }
 
     private static void PlayWithStrings()
@@ -79,50 +83,65 @@ namespace ConsoleApp1
             //Clean up
             string cleanMe = firstName.Trim(); //TrimStart , TrimEnd
             String makeLonger = firstName.PadLeft(20); //PadRight
-
  }
 
-    private static void DisplayMenu()
+    private static bool DisplayMenu()
     {
-        Console.WriteLine("A)dd Movie");
-        Console.WriteLine("E)dit Movie");
-        Console.WriteLine("D)elete Movie");
-        Console.WriteLine("V)iew Movies");
-        Console.WriteLine("Q)uit");
+            while (true)
+            {
+                Console.WriteLine("A)dd Movie");
+                Console.WriteLine("E)dit Movie");
+                Console.WriteLine("D)elete Movie");
+                Console.WriteLine("V)iew Movies");
+                Console.WriteLine("Q)uit");
 
-        string input = Console.ReadLine();
-        switch (input[0])//(input[0]) searches for a character in a string - strings are not arrays in C#
-        {
-            case 'A': AddMovie(); break; //required in C# - every case statement requires a break
-            case 'E': EditMovie(); break;
-            case 'D': DeleteMovie(); break;
-            case 'V': ViewMovies(); break;
-            case 'Q':; break;
+                string input = Console.ReadLine();
+                switch (input[0])//(input[0]) searches for a character in a string - strings are not arrays in C#
 
-            default: Console.WriteLine("Please enter a valid value."); break;
-        };
+                {
+                    case 'a':
+                    case 'A': AddMovie();return true ;  //required in C# - every case statement requires a break
+
+                    case 'e':
+                    case 'E': EditMovie(); return true;
+
+                    case 'd':
+                    case 'D': DeleteMovie(); return true;
+
+                    case 'v':
+                    case 'V': ViewMovies(); return true;
+
+                    case 'q':
+                    case 'Q':; return false;
+
+
+                    default:
+                        Console.WriteLine("Please enter a valid value.");
+                        break;
+                };
+            };
     }
 
     private static void AddMovie()
     {
-        throw new NotImplementedException();
+            Console.WriteLine("AddMovie");
     }
 
     private static void EditMovie()
     {
-        throw new NotImplementedException();
-    }
+            Console.WriteLine("EditMovie");
+        }
 
     private static void ViewMovies()
     {
-        throw new NotImplementedException();
-    }
+            Console.WriteLine("ViewMovie");
+        }
 
     private static void DeleteMovie()
     {
-        throw new NotImplementedException();
-    }
+            Console.WriteLine("DeleteMovie");
+        }
 }
 }
-    }
-}
+    
+
