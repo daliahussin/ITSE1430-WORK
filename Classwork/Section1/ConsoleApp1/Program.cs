@@ -9,72 +9,72 @@ namespace ConsoleApp1
     class Program
     {
         static void Main(string[] args)
-       {
+        {
             bool notQuit;
             do
             {
-                 notQuit = DisplayMenu();
+                notQuit = DisplayMenu();
             } while (notQuit);
 
-       // PlayWithStrings();
-    }
+            // PlayWithStrings();
+        }
 
-    private static void PlayWithStrings()
-    {
+        private static void PlayWithStrings()
+        {
 
-        string hoursString = "10A";
-        // int hours = Int32.Parse(hoursString);//must be proper primitive
-        //int hours;
-        //bool result = Int32.TryParse(hoursString, out hours); //out parameter HOW YOU PARSE STRINGS
-        //bool result = Int32.TryParse(hoursString, out int hours); //^ previous 2 lines can be combined for clarity and maintenance using local declarations
-        //TryParse is used to validate user input
+            string hoursString = "10A";
+            // int hours = Int32.Parse(hoursString);//must be proper primitive
+            //int hours;
+            //bool result = Int32.TryParse(hoursString, out hours); //out parameter HOW YOU PARSE STRINGS
+            //bool result = Int32.TryParse(hoursString, out int hours); //^ previous 2 lines can be combined for clarity and maintenance using local declarations
+            //TryParse is used to validate user input
 
-        //ToString
-        // hoursString = hours.ToString();// works on any expression; converts any expression to its string equivalent
-        //4.75.ToString();
-        //457.ToString
-        //Console.ReadLine().ToSTring();
+            //ToString
+            // hoursString = hours.ToString();// works on any expression; converts any expression to its string equivalent
+            //4.75.ToString();
+            //457.ToString
+            //Console.ReadLine().ToSTring();
 
-        string message = "Hello\tworld";
-        string filePath = @"C:\\Temp\\Test"; // \\maps to one character = used to make filepath valid
-                                             //verbatim strings
-        filePath = @"C:\\Temp\\Test";
+            string message = "Hello\tworld";
+            string filePath = @"C:\\Temp\\Test"; // \\maps to one character = used to make filepath valid
+                                                 //verbatim strings
+            filePath = @"C:\\Temp\\Test";
 
-        //Concat
-        string firstName = "Bob";
-        string lastName = "Smith";
-        string name = firstName + " " + lastName;
+            //Concat
+            string firstName = "Bob";
+            string lastName = "Smith";
+            string name = firstName + " " + lastName;
 
-        // strings are immutable - this produces a new string
-        name = "Hello" + name;
-        Console.WriteLine("hello" + name);//just want to print it to the console - 6 max per program when using +  Approach 1
-        Console.WriteLine("Hello {0} {1}", firstName, lastName); //alternative to +.  No maximum. approach 2
-        string str = String.Format("Hello {0} {1}, firstName, lastName");  // approach 3
-        Console.WriteLine(str);
+            // strings are immutable - this produces a new string
+            name = "Hello" + name;
+            Console.WriteLine("hello" + name);//just want to print it to the console - 6 max per program when using +  Approach 1
+            Console.WriteLine("Hello {0} {1}", firstName, lastName); //alternative to +.  No maximum. approach 2
+            string str = String.Format("Hello {0} {1}, firstName, lastName");  // approach 3
+            Console.WriteLine(str);
 
-        //Approach 4
-        Console.WriteLine($"Hello {firstName} {lastName}");//interpreted string - language limitations compiler will tell you, stick with identifiers and integers
-                                                           //String is more readable, can't screw it up?,
+            //Approach 4
+            Console.WriteLine($"Hello {firstName} {lastName}");//interpreted string - language limitations compiler will tell you, stick with identifiers and integers
+                                                               //String is more readable, can't screw it up?,
 
-        string missing = null;
-        string empty = " ";
-        string empty2 = String.Empty;
+            string missing = null;
+            string empty = " ";
+            string empty2 = String.Empty;
 
-        //checking for empty stringss
-        // if (firstName.Lenght==0)
-        // if (FirstName != null&& firstName != "")
-        if (!String.IsNullOrEmpty(firstName))
-            Console.WriteLine(firstName);
+            //checking for empty stringss
+            // if (firstName.Lenght==0)
+            // if (FirstName != null&& firstName != "")
+            if (!String.IsNullOrEmpty(firstName))
+                Console.WriteLine(firstName);
 
-        //Other stuff
-        string upperName = firstName.ToUpper();
+            //Other stuff
+            string upperName = firstName.ToUpper();
 
-        string lowerName = firstName.ToLower();
+            string lowerName = firstName.ToLower();
 
-        // Comparison
-        bool areEqual = firstName == lastName;
-        areEqual = firstName.ToLower() == lastName.ToLower();
-        areEqual = String.Compare(firstName, lastName, true) == 0;
+            // Comparison
+            bool areEqual = firstName == lastName;
+            areEqual = firstName.ToLower() == lastName.ToLower();
+            areEqual = String.Compare(firstName, lastName, true) == 0;
 
             bool startsWithA = firstName.StartsWith("A");
             bool endsWithA = firstName.EndsWith("A");
@@ -84,10 +84,35 @@ namespace ConsoleApp1
             //Clean up
             string cleanMe = firstName.Trim(); //TrimStart , TrimEnd
             String makeLonger = firstName.PadLeft(20); //PadRight
- }
+        }
 
-    private static bool DisplayMenu()
-    {
+        private static void PlayWithArrays()
+        {
+            int count = ReadInt32("How many names? ", 1);
+
+            string[] names = new string[count];
+            for (int index =0; index < count; ++index)
+            {
+                Console.WriteLine("Name? ");
+                names[index] = Console.ReadLine();
+            };
+
+            foreach(string name in names)
+         //   for ( int index =0; index < names.Length; ++index)
+            {
+                // readonly - not allowed
+                //name= "";
+                string str = name;
+                str = "";
+                //   Console.WriteLine(names[index]);
+                Console.WriteLine(name);
+            };
+        }
+        private static bool DisplayMenu()
+
+        {
+
+
             while (true)
             {
                 Console.WriteLine("A)dd Movie");
@@ -101,7 +126,7 @@ namespace ConsoleApp1
 
                 {
                     case 'a':
-                    case 'A': AddMovie();return true ;  //required in C# - every case statement requires a break
+                    case 'A': AddMovie(); return true;  //required in C# - every case statement requires a break
 
                     case 'e':
                     case 'E': EditMovie(); return true;
@@ -121,28 +146,70 @@ namespace ConsoleApp1
                         break;
                 };
             };
-    }
+        }
 
-    private static void AddMovie()
-    {
-            Console.WriteLine("AddMovie");
-    }
+        private static void AddMovie()
+        {
+            name = ReadString("Enter a name: ", true);
+            desciption = ReadString("Enter a description: ");
+            runLength = ReadInt32("Enter run length (in minutes): ", 0);
+        }
+        
 
-    private static void EditMovie()
-    {
+        private static void EditMovie()
+        {
             Console.WriteLine("EditMovie");
         }
 
-    private static void ViewMovies()
-    {
+        private static void ViewMovies()
+        {
             Console.WriteLine("ViewMovie");
         }
 
-    private static void DeleteMovie()
-    {
+        private static void DeleteMovie()
+        {
             Console.WriteLine("DeleteMovie");
         }
-}
+        private static int ReadInt32(string message, int minValue)
+        {
+            while (true)
+            {
+                Console.WriteLine(message);
+                string input = Console.ReadLine();
+
+                if (Int32.TryParse(input, out int result))
+                {
+                    if (result > minValue)
+                        return result;
+                };
+                Console.WriteLine($"You must enter an integer value >= {minValue}");
+            };
+        }
+
+        private static string ReadString (string message)
+        {
+            return ReadString(message, false);
+        }
+        private static string ReadString(string message, bool required)
+        {
+            while (true)
+            {
+                Console.WriteLine(message);
+                string input = Console.ReadLine();
+
+                if (!String.IsNullOrEmpty(input)|| !required)
+
+                return input;
+                Console.WriteLine("You must enter a value");
+            };
+          
+        }
+        // A movie
+        static string name;
+        static string desciption;
+        static int runLength;
+       // static DateTime releaseDate;
+    }
 }
     
 
