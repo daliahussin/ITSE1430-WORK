@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * Sample implementation
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -91,14 +95,14 @@ namespace ConsoleApp1
             int count = ReadInt32("How many names? ", 1);
 
             string[] names = new string[count];
-            for (int index =0; index < count; ++index)
+            for (int index = 0; index < count; ++index)
             {
                 Console.WriteLine("Name? ");
                 names[index] = Console.ReadLine();
             };
 
-            foreach(string name in names)
-         //   for ( int index =0; index < names.Length; ++index)
+            foreach (string name in names)
+            //   for ( int index =0; index < names.Length; ++index)
             {
                 // readonly - not allowed
                 //name= "";
@@ -111,8 +115,6 @@ namespace ConsoleApp1
         private static bool DisplayMenu()
 
         {
-
-
             while (true)
             {
                 Console.WriteLine("A)dd Movie");
@@ -148,28 +150,81 @@ namespace ConsoleApp1
             };
         }
 
+ 
+
+        private static void ViewMovies()
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("No movies available");
+                return;
+            };
+            Console.WriteLine(name);
+
+            if (string.IsNullOrEmpty(desciption))
+                Console.WriteLine(desciption);
+
+            //  Console.WriteLine("Run length (mins) = " + runLength);
+            Console.WriteLine($"Run length = {runLength} mins");
+        }
+
+        private static void EditMovie()
+        {
+            ViewMovies();
+
+            string newName = ReadString("Enter a name (or press ENTER fo default): ", false);
+            if (!String.IsNullOrEmpty(newName))
+                name = newName;
+
+            string newDesciption = ReadString("Enter a description (or press ENTER fo default): ");
+            if (!String.IsNullOrEmpty(newDesciption))
+                desciption = newDesciption;
+
+            int newLength = ReadInt32("Enter run length (in minutes): ", 0);
+            if (newLength > 0)
+                runLength = newLength;
+        }
+
         private static void AddMovie()
         {
             name = ReadString("Enter a name: ", true);
             desciption = ReadString("Enter a description: ");
             runLength = ReadInt32("Enter run length (in minutes): ", 0);
         }
-        
-
-        private static void EditMovie()
-        {
-            Console.WriteLine("EditMovie");
-        }
-
-        private static void ViewMovies()
-        {
-            Console.WriteLine("ViewMovie");
-        }
 
         private static void DeleteMovie()
         {
-            Console.WriteLine("DeleteMovie");
+            if (Confirm("Are you sure you want to delete this movie?"))
+            {
+                // "Delete" the movie
+                name = null;
+                desciption = null;
+                runLength = 0;
+            };
         }
+
+        private static bool Confirm(string message)
+        {
+            Console.WriteLine($"{message} (Y/N)");
+
+            do
+            {
+                ConsoleKeyInfo Key = Console.ReadKey(true);
+                switch (Key.KeyChar)
+                {
+                    case 'Y':
+                    case 'y': return true;
+
+                    case 'N':
+                    case 'n': return false;
+                };
+            } while (true);
+        }
+        // if (Key.KeyChar == 'Y')
+        //  return true;
+        //   else if (Key.KeyChar == 'N')
+        // return false;
+
         private static int ReadInt32(string message, int minValue)
         {
             while (true)
@@ -186,7 +241,7 @@ namespace ConsoleApp1
             };
         }
 
-        private static string ReadString (string message)
+        private static string ReadString(string message)
         {
             return ReadString(message, false);
         }
@@ -197,19 +252,19 @@ namespace ConsoleApp1
                 Console.WriteLine(message);
                 string input = Console.ReadLine();
 
-                if (!String.IsNullOrEmpty(input)|| !required)
+                if (!String.IsNullOrEmpty(input) || !required)
 
-                return input;
+                    return input;
                 Console.WriteLine("You must enter a value");
             };
-          
+
         }
         // A movie
         static string name;
         static string desciption;
         static int runLength;
-       // static DateTime releaseDate;
+        // static DateTime releaseDate;
     }
 }
-    
+
 
