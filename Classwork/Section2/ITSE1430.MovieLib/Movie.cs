@@ -8,56 +8,31 @@ namespace ITSE1430.MovieLib
 {
    public class Movie
     {
-        public string GetName()
+        public string Name
         {
-            return _name ?? "";
+            get { return _name ?? ""; } // string get ()
+            set { _name = value; } // void set (string value)
         }
-        public void SetName (string value)
-        {
-            _name = value;
-        }
-        private string _name;
-
+        
+        private string _name = "";
         // public System.String Name;
 
-        public String GetDescription()
+            public string Description
         {
-            return _description ?? "";
-        }
-        public void SetDescription ( string value)
-        {
-            _description = value;
-        }
-        private string _description;
+            get { return _description ?? ""; }
+            set { _description = value; }
 
-        public int GetReleaseYear()
-        {
-            return _releaseYear; 
         }
-        public void SetReleaseYear(int value)
-        {
-            if(value >= 1900)
-            _releaseYear = value;
-        }
-        private int _releaseYear;
+         private string _description;
 
-        public int GetRunLength()
-        {
-            return _runLength;
-        }
-        public void SetRunLength(int value)
-        {
-            if ( value >= 0)
-            _runLength = value;
-        }
-        private int _runLength;
+        public int ReleaseYear { get; set; } = 1900;
+      
+        // Auto property syntax
+        public int RunLength { get; set; }
+       
 
-
-        //public int ReleaseYear;
-        //public int RunLength;
-
-        int someValue;
-        private int someValue2;
+        //int someValue;
+        //private int someValue2;
 
         //void Foo()
         //   {
@@ -68,6 +43,13 @@ namespace ITSE1430.MovieLib
         //     var y = someValue;
         //  }
 
+            //Showing mixed accessability
+        public int Id { get; private set; }
 
+        public bool IsColor
+        {
+            get { return ReleaseYear > 1940; }
+        }
+        public bool IsOwned { get; set; }
     }
 }
