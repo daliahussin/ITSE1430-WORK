@@ -91,7 +91,7 @@
             this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
             this.eDITToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.eDITToolStripMenuItem.Text = "Edit";
-            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.OnMovieDelete);
+            this.eDITToolStripMenuItem.Click += new System.EventHandler(this.OnMovieEdit);
             // 
             // deleteToolStripMenuItem
             // 
@@ -125,6 +125,8 @@
             this._listMovies.Name = "_listMovies";
             this._listMovies.Size = new System.Drawing.Size(624, 406);
             this._listMovies.TabIndex = 1;
+            this._listMovies.DoubleClick += new System.EventHandler(this.OnMovieDoubleClick);
+            this._listMovies.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnListKeyUp);
             // 
             // MainForm
             // 
@@ -142,7 +144,6 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
-
         }
 
         #endregion
@@ -159,4 +160,5 @@
         private System.Windows.Forms.ListBox _listMovies;
     }
 }
+
 

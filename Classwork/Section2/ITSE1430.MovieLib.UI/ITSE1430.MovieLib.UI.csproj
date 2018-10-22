@@ -87,6 +87,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ITSE1430.MovieLib.Memory\ITSE1430.MovieLib.Memory.csproj">
+      <Project>{f771759d-3841-408a-af1d-fb425c877f60}</Project>
+      <Name>ITSE1430.MovieLib.Memory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ITSE1430.MovieLib\ITSE1430.MovieLib.csproj">
       <Project>{15ece267-b883-4d15-b1d7-1fba6308f5b2}</Project>
       <Name>ITSE1430.MovieLib</Name>

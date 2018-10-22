@@ -1,6 +1,6 @@
 ﻿namespace ITSE1430.MovieLib.UI
 {
-    partial class MovieForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,6 @@
             this._chkOwned = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            
             this.SuspendLayout();
             // 
             // label1
@@ -81,14 +80,14 @@
             this._textDescription.Location = new System.Drawing.Point(99, 56);
             this._textDescription.Multiline = true;
             this._textDescription.Name = "_textDescription";
-            this._textDescription.Size = new System.Drawing.Size(241, 55);
+            this._textDescription.Size = new System.Drawing.Size(241, 32);
             this._textDescription.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 117);
+            this.label3.Location = new System.Drawing.Point(22, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 4;
@@ -97,7 +96,7 @@
             // _textRelease
             // 
             this._textRelease.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this._textRelease.Location = new System.Drawing.Point(99, 117);
+            this._textRelease.Location = new System.Drawing.Point(99, 94);
             this._textRelease.Name = "_textRelease";
             this._textRelease.Size = new System.Drawing.Size(80, 20);
             this._textRelease.TabIndex = 2;
@@ -107,7 +106,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 147);
+            this.label4.Location = new System.Drawing.Point(39, 124);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 6;
@@ -116,7 +115,7 @@
             // _textRunLang
             // 
             this._textRunLang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this._textRunLang.Location = new System.Drawing.Point(99, 147);
+            this._textRunLang.Location = new System.Drawing.Point(99, 124);
             this._textRunLang.Name = "_textRunLang";
             this._textRunLang.Size = new System.Drawing.Size(80, 20);
             this._textRunLang.TabIndex = 3;
@@ -125,7 +124,7 @@
             // _buttonSave
             // 
             this._buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this._buttonSave.Location = new System.Drawing.Point(178, 198);
+            this._buttonSave.Location = new System.Drawing.Point(178, 175);
             this._buttonSave.Name = "_buttonSave";
             this._buttonSave.Size = new System.Drawing.Size(75, 23);
             this._buttonSave.TabIndex = 5;
@@ -136,7 +135,7 @@
             // _buttonCancel
             // 
             this._buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this._buttonCancel.Location = new System.Drawing.Point(265, 198);
+            this._buttonCancel.Location = new System.Drawing.Point(265, 175);
             this._buttonCancel.Name = "_buttonCancel";
             this._buttonCancel.Size = new System.Drawing.Size(75, 23);
             this._buttonCancel.TabIndex = 6;
@@ -148,7 +147,7 @@
             // 
             this._chkOwned.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this._chkOwned.AutoSize = true;
-            this._chkOwned.Location = new System.Drawing.Point(99, 173);
+            this._chkOwned.Location = new System.Drawing.Point(99, 150);
             this._chkOwned.Name = "_chkOwned";
             this._chkOwned.Size = new System.Drawing.Size(66, 17);
             this._chkOwned.TabIndex = 4;
@@ -159,8 +158,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-           
-       
             // MovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

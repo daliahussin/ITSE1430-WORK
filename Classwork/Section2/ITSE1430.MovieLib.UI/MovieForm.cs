@@ -10,123 +10,131 @@ using System.Windows.Forms;
 
 namespace ITSE1430.MovieLib.UI
 {
-    public partial class MovieForm : Form
+    public partial class MainForm : Form
     {
-        public MovieForm()
+        #region Construction
+
+        public MainForm()
         {
             InitializeComponent();
         }
+        #endregion
 
-        public Movie Movie { get; set; }
+        //This method can be overridden in a derived type
+        //protected virtual void SomeFunction ()
+        //{ }
 
-        private void MovieForm_Load(object sender, EventArgs e)
+        //This method MUST BE defined in a derived type
+        //protected abstract void SomeAbstractFunction();
+
+        /// <summary></summary>
+        /// <param name="e"></param>
+        protected override void OnLoad(EventArgs e)
         {
-            //_btnSave.Click += _btnSave_Click;
-            if (Movie != null)
-            {
-                _textName.Text = Movie.Name;
-                _textDescription.Text = Movie.Description;
-                _textRelease.Text = Movie.ReleaseYear.ToString();
-                _textRunLang.Text = Movie.RunLength.ToString();
-                _chkOwned.Checked = Movie.IsOwned;
-            };
-            ValidateChildren();
-        }
+            base.OnLoad(e);
 
-        private void _btnSave_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
+            _listMovies.DisplayMember = "Name";
+            RefreshMovies();
         }
 
         #region Event Handlers
 
-        private void OnCancel(object sender, EventArgs e)
+        private void OnFileExit(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-        private void OnSave(object sender, EventArgs e)
-        {
-            if (!ValidateChildren())
+            if (MessageBox.Show("Are you sure you want to exit?",
+                        "Close", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
-
-            var movie = new Movie();
-
-            //Name is required
-            movie.Name = _textName.Text;
-            movie.Description = _textDescription.Text;
-            movie.ReleaseYear = GetInt32(_textRelease);
-            movie.RunLength = GetInt32(_textRunLang);
-            movie.IsOwned = _chkOwned.Checked;
-
-            Movie = movie;
-            DialogResult = DialogResult.OK;
             Close();
-
-            //Using properties so don't need the method calls
-            //movie.SetName(_txtName.Text);
-            //movie.SetDescription(_txtDescription.Text);
-            //movie.SetReleaseYear(GetInt32(_txtReleaseYear));
-            //if (movie.GetReleaseYear() < 0)
-            //movie.SetRunLength(GetInt32(_txtRunLength));
-            //if (movie.GetRunLength() < 0)
         }
 
+        private void OnHelpAbout(object sender, EventArgs e)
+        {
+            //aboutToolStripMenuItem.
+            MessageBox.Show(this, "Sorry", "Help", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void OnMovieAdd(object sender, EventArgs e)
+        {
+            var form = new MovieForm();
+            if (form.ShowDialog(this) == DialogResult.Cancel)
+                return;
+
+            //Add to database and refresh
+            _database.Add(form.Movie);
+            RefreshMovies();
+        }
+
+        private void OnMovieDelete(object sender, EventArgs e)
+        {
+            DeleteMovie();
+        }
+
+        private void OnMovieEdit(object sender, EventArgs e)
+        {
+            EditMovie();
+        }
+
+        private void OnMovieDoubleClick(object sender, EventArgs e)
+        {
+            EditMovie();
+        }
+
+        private void OnListKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                DeleteMovie();
+            };
+        }
         #endregion
 
         #region Private Members
 
-        private int GetInt32(TextBox textBox)
+        private void DeleteMovie()
         {
-            if (String.IsNullOrEmpty(textBox.Text))
-                return 0;
+            //Get selected movie, if any
+            var item = GetSelectedMovie();
+            if (item == null)
+                return;
 
-            if (Int32.TryParse(textBox.Text, out var value))
-                return value;
-
-            return -1;
-        }
-        #endregion
-
-        private void OnValidateName(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            var control = sender as TextBox;
-
-            if (String.IsNullOrEmpty(control.Text))
-            {
-                _errors.SetError(control, "Name is required");
-                e.Cancel = true;
-            }
-            else
-                _errors.SetError(control, "");
+            //Remove from database and refresh
+            _database.Remove(item.Name);
+            RefreshMovies();
         }
 
-        private void OnValidatingReleaseYear(object sender,  System.ComponentModel.CancelEventArgs e)
+        private void EditMovie()
         {
-            var control = sender as TextBox;
-            var result = GetInt32(control);
-            if (result < 1900)
-            {
-                _error.SetError(control, "Must be > 1900");
-                e.Cancel = true;
-            }
-            else
-                _errors.SetError(control, "");
-        }
-        private void OnValidatingRunLength(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            var control = sender as TextBox;
-            var result = GetInt32(control);
-            if (result < 0)
-            {
-                _errors.SetError(control, "Must be > 0");
-                e.Cancel = true;
-            }
-            _errors.SetError(control, "");
+            //Get selected movie, if any
+            var item = GetSelectedMovie();
+            if (item == null)
+                return;
+
+            //Show form with selected movie
+            var form = new MovieForm();
+            form.Movie = item;
+            if (form.ShowDialog(this) == DialogResult.Cancel)
+                return;
+
+            //Update database and refresh
+            _database.Edit(item.Name, form.Movie);
+            RefreshMovies();
         }
 
-      
+        private void RefreshMovies()
+        {
+            var movies = _database.GetAll();
+
+            _listMovies.Items.Clear();
+            _listMovies.Items.AddRange(movies);
+        }
+
+        private Movie GetSelectedMovie()
+        {
+            return _listMovies.SelectedItem as Movie;
+        }
+
+        private MovieDatabase _database = new MemoryMovieDatabase();
+
+        #endregion        
     }
-}

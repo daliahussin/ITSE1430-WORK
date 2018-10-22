@@ -11,14 +11,17 @@ namespace Itse1430.MovieLib.UI
 {
     public partial class MainForm : Form
     {
+        #region Construction
+
         public MainForm()
         {
             InitializeComponent();
         }
+        #endregion
 
         //This method can be overridden in a derived type
-        protected virtual void SomeFunction()
-        { }
+        //protected virtual void SomeFunction ()
+        //{ }
 
         //This method MUST BE defined in a derived type
         //protected abstract void SomeAbstractFunction();
@@ -75,6 +78,14 @@ namespace Itse1430.MovieLib.UI
         {
             EditMovie();
         }
+
+        private void OnListKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                DeleteMovie();
+            };
+        }
         #endregion
 
         #region Private Members
@@ -122,20 +133,8 @@ namespace Itse1430.MovieLib.UI
             return _listMovies.SelectedItem as Movie;
         }
 
-        private MovieDatabase _database = new MovieDatabase();
+        private MovieDatabase _database = new MemoryMovieDatabase();
 
-        #endregion
-
-        private void OnListKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Delete)
-            {
-                DeleteMovie();
-            };
-        }
+        #endregion        
     }
 }
-
-
-
-
