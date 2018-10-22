@@ -1,4 +1,8 @@
-﻿namespace CharacterCreator.Winforms
+﻿/* ITSE1430
+ * DALIA HUSSIN
+ * 10/22/2018
+ */
+namespace CharacterCreator.Winforms
 {
     partial class CharacterForm
     {
