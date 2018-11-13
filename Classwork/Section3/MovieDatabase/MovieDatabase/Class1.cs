@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITSE1430.Movie.lib.Sql
+namespace MovieDatabase
 {
-    public class SqlMovieDatabase:MovieDatabase
-    {
-
-    }
+    public class Class1
     {
     }
 }
