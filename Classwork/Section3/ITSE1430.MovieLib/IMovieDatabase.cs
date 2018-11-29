@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITSE1430.Movie.lib.sql
+namespace ITSE1430.MovieLib
 {
-    class AssemblyInfo
+    class IMovieDatabase
     {
     }
 }

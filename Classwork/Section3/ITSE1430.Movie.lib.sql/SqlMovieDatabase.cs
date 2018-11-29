@@ -27,26 +27,6 @@ namespace ITSE1430.Movie.lib.Sql
 
         protected override void AddCore(Movie movie)
         {
-            //var conn = new SqlConnection(_connectionString);
-
-            #region Approaches to adding parameters
-
-            //Approach 1
-            //var param = new SqlParameter("@title", System.Data.SqlDbType.VarChar);
-            //param.Value = movie.Name;
-            //cmd.Parameters.Add(param);
-
-            //Approach 2
-            //var param = cmd.Parameters.Add("@title", System.Data.SqlDbType.VarChar);
-            //param.Value = movie.Name;
-
-            //Approach 3            
-            //cmd.Parameters.AddWithValue("@title", movie.Name);
-
-            #endregion
-
-            //Run command
-            //try
             using (var conn = CreateConnection())
             {
                 var cmd = new SqlCommand("AddMovie", conn);
@@ -61,17 +41,12 @@ namespace ITSE1430.Movie.lib.Sql
                 var result = cmd.ExecuteScalar();
                 var id = Convert.ToInt32(result);
             };
-            /*} finally
-            {
-                conn.Close();
-            };*/
         }
 
         protected override void EditCore(Movie oldMovie, Movie newMovie)
         {
             using (var conn = CreateConnection())
             {
-                //var cmd = new SqlCommand("AddMovie", conn);
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "UpdateMovie";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -90,7 +65,6 @@ namespace ITSE1430.Movie.lib.Sql
 
         protected override Movie FindByName(string name)
         {
-            //Use a data reader
             using (var conn = CreateConnection())
             {
                 var cmd = new SqlCommand("GetAllMovies", conn);
@@ -101,32 +75,41 @@ namespace ITSE1430.Movie.lib.Sql
                 {
                     while (reader.Read())
                     {
-                        var name =
+                        var movieName = reader.GetString(1);
+                        if (String.Compare(movieName, name, true) != 0)
+                            continue;
+
+                        return new SqlMovie()
+                        {
+                            Id = reader.GetFieldValue<int>(0),
+                            Name = movieName,
+                            Description = Convert.ToString(reader.GetValue(2)),
+                            ReleaseYear = 1900,
+                            RunLength = reader.GetFieldValue<int>(3),
+                            IsOwned = reader.GetBoolean(4),
+                        };
                     };
                 };
             };
+
+            return null;
         }
 
         protected override IEnumerable<Movie> GetAllCore()
         {
-            //Using a data set
             var ds = new DataSet();
 
-            //Create connection
             using (var conn = CreateConnection())
             {
                 var da = new SqlDataAdapter();
                 var cmd = new SqlCommand("GetAllMovies", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                //Use data adapter to fill dataset
                 da.SelectCommand = cmd;
                 da.Fill(ds);
             };
 
             //Must have at least one table
-            //if (!ds.Tables.OfType<DataTable>().Any())
-            //    return Enumerable.Empty<Movie>();
             var table = ds.Tables.OfType<DataTable>().FirstOrDefault();
             if (table == null)
                 return Enumerable.Empty<Movie>();
@@ -135,7 +118,6 @@ namespace ITSE1430.Movie.lib.Sql
             var movies = new List<Movie>();
             foreach (var row in table.Rows.OfType<DataRow>())
             {
-                //Use ordinal or column names
                 var movie = new SqlMovie()
                 {
                     Id = Convert.ToInt32(row["Id"]),
@@ -188,3 +170,4 @@ namespace ITSE1430.Movie.lib.Sql
         #endregion
     }
 }
+

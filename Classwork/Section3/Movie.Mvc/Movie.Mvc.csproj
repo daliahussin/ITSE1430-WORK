@@ -152,6 +152,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MovieModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,7 +196,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Views\Movie\" />
   </ItemGroup>
   <ItemGroup>
@@ -212,13 +212,13 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Database1\MovieDatabase.sqlproj">
-      <Project>{699d490a-e127-42f0-949b-b75058ae25a6}</Project>
-      <Name>MovieDatabase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ITSE1430.Movie.lib.sql\ITSE1430.Movie.lib.Sql.csproj">
       <Project>{71822726-0814-411c-8856-09ef2c6132e0}</Project>
       <Name>ITSE1430.Movie.lib.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ITSE1430.MovieLib\ITSE1430.MovieLib.csproj">
+      <Project>{15ece267-b883-4d15-b1d7-1fba6308f5b2}</Project>
+      <Name>ITSE1430.MovieLib</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
