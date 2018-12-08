@@ -1,5 +1,5 @@
 ﻿/* ITSE 1430
- * Dalia Hussin.
+ * Dalia Hussin
  * 12/8/2018
  */
 using System.Web;
