@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Itse1430.MovieLib.UI;
+using System;
 using System.Windows.Forms;
 
 namespace ITSE1430.MovieLib.UI

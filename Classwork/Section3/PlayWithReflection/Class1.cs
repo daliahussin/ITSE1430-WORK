@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITSE1430.MovieLib
+namespace PlayWithReflection
 {
-    class Movie
+    public class Class1
     {
-        public string Name;    // public System.String Name;
-
     }
 }
